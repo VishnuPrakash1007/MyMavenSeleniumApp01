@@ -13,7 +13,7 @@ pipeline {
                 checkout scm
 
                 // OR use this if not configured:
-                // git url: 'https://github.com/rakshith31-hub/MyMavenSeleniumApp01.git', branch: 'master'
+                git url: 'https://github.com/rakshith31-hub/MyMavenSeleniumApp01.git', branch: 'master'
             }
         }
 
