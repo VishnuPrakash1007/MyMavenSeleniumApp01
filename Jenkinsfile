@@ -13,7 +13,11 @@ pipeline {
                 url: 'https://github.com/VishnuPrakash1007/MyMavenSeleniumApp01.git'
             }
         }
-
+stage('Clean') {
+    steps {
+        sh 'mvn clean'
+    }
+}
         stage('Build') {
             steps {
                 sh 'mvn clean package -DskipTests'
