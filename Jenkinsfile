@@ -1,24 +1,25 @@
 pipeline {
-    agent any
+    agent any   // Run on any available agent
+
+    tools {
+        maven 'Maven'   // Must match name configured in Jenkins (Global Tool Config)
+    }
 
     stages {
 
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/rakshith31-hub/MyMavenSeleniumApp02.git'
-            }
-        }
+                // Recommended if repo is configured in Jenkins
+                checkout scm
 
-        stage('Verify Tools') {
-            steps {
-                sh 'java -version'
-                sh 'mvn -v'
+                // OR use this if not configured:
+                // git url: 'https://github.com/sumanthr27/MyMavenSeleniumApp01.git', branch: 'master'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                sh 'mvn clean package'
             }
         }
 
@@ -32,6 +33,12 @@ pipeline {
     post {
         always {
             echo 'Pipeline execution completed'
+        }
+        success {
+            echo 'Build SUCCESS ✅'
+        }
+        failure {
+            echo 'Build FAILED ❌'
         }
     }
 }
